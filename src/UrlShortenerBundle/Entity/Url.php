@@ -14,11 +14,12 @@ use JMS\Serializer\Annotation\Expose;
  *
  * @ORM\Table(name="urlshortener_url",indexes={@ORM\Index(name="search_idx", columns={"short_code"})})
  * @ORM\Entity(repositoryClass="UrlShortenerBundle\Entity\UrlRepository")
+ * @UniqueEntity("url")
  * @UniqueEntity("shortCode")
  * @ExclusionPolicy("all")
  */
-class Url
-{
+class Url {
+
     /**
      * @var integer
      *
@@ -31,7 +32,6 @@ class Url
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Length(min = "3")
      * @Assert\Regex(pattern="/^((http|https)\:\/{2})/")
      * @ORM\Column(name="url", type="text")
      * @Expose
@@ -61,14 +61,19 @@ class Url
      */
     private $counter;
 
+    /**
+     * contstructor
+     */
+    function __construct() {
+        $this->counter = 0;
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -78,8 +83,7 @@ class Url
      * @param string $url
      * @return Url
      */
-    public function setUrl($url)
-    {
+    public function setUrl($url) {
         $this->url = $url;
 
         return $this;
@@ -90,8 +94,7 @@ class Url
      *
      * @return string 
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->url;
     }
 
@@ -101,8 +104,7 @@ class Url
      * @param string $shortCode
      * @return Url
      */
-    public function setShortCode($shortCode)
-    {
+    public function setShortCode($shortCode) {
         $this->shortCode = $shortCode;
 
         return $this;
@@ -113,8 +115,7 @@ class Url
      *
      * @return string 
      */
-    public function getShortCode()
-    {
+    public function getShortCode() {
         return $this->shortCode;
     }
 
@@ -124,8 +125,7 @@ class Url
      * @param \DateTime $dateCreated
      * @return Url
      */
-    public function setDateCreated($dateCreated)
-    {
+    public function setDateCreated($dateCreated) {
         $this->dateCreated = $dateCreated;
 
         return $this;
@@ -136,8 +136,7 @@ class Url
      *
      * @return \DateTime 
      */
-    public function getDateCreated()
-    {
+    public function getDateCreated() {
         return $this->dateCreated;
     }
 
@@ -147,8 +146,7 @@ class Url
      * @param integer $counter
      * @return Url
      */
-    public function setCounter($counter)
-    {
+    public function setCounter($counter) {
         $this->counter = $counter;
 
         return $this;
@@ -159,21 +157,20 @@ class Url
      *
      * @return integer 
      */
-    public function getCounter()
-    {
+    public function getCounter() {
         return $this->counter;
     }
-    
-     /**
+
+    /**
      * add one to counter
      *
      * @param integer $counter
      * @return Url
      */
-    public function addCounter()
-    {
+    public function addCounter() {
         $this->counter++;
 
         return $this;
     }
+
 }

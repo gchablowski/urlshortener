@@ -1,0 +1,3 @@
+services:
+    urlshortener.base62:
+        class: UrlShortenerBundle\Services\Base62Service
