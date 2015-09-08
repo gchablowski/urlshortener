@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * Url
@@ -13,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="urlshortener_url",indexes={@ORM\Index(name="search_idx", columns={"short_code"})})
  * @ORM\Entity(repositoryClass="UrlShortenerBundle\Entity\UrlRepository")
  * @UniqueEntity("shortCode")
+ * @ExclusionPolicy("all")
  */
 class Url
 {
@@ -29,6 +32,7 @@ class Url
      * @var string
      * @Assert\Url()
      * @ORM\Column(name="url", type="text")
+     * @Expose
      */
     private $url;
 
@@ -36,6 +40,7 @@ class Url
      * @var string
      *
      * @ORM\Column(name="short_code", type="string", length=255)
+     * @Expose
      */
     private $shortCode;
 
@@ -155,5 +160,18 @@ class Url
     public function getCounter()
     {
         return $this->counter;
+    }
+    
+     /**
+     * add one to counter
+     *
+     * @param integer $counter
+     * @return Url
+     */
+    public function addCounter()
+    {
+        $this->counter++;
+
+        return $this;
     }
 }

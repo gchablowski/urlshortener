@@ -1,5 +1,4 @@
 url_shortener:
-    resource: "@UrlShortenerBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    resource: UrlShortenerBundle\Controller\DefaultController
+    type:     rest
 
