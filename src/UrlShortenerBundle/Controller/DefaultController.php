@@ -4,8 +4,10 @@ namespace UrlShortenerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use UrlShortenerBundle\Entity\Url;
+use UrlShortenerBundle\Form\UrlType;
 
 class DefaultController extends Controller
 {
@@ -32,5 +34,31 @@ class DefaultController extends Controller
         $em->flush();
 
         return $entity;
+    }
+    
+    /**
+     * post url action
+     * @param Request $request
+     * @return array() with a form
+     *
+     * @Rest\Post("/url/add", name="url_add")
+     */
+    public function urlAction(Request $request) {
+        //create new object
+        $url = new Url();
+
+        //create form
+        $form = $this->createForm(new UrlType(), $url);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+           
+        }
+
+        return array(
+            'form' => $form,
+        );
     }
 }

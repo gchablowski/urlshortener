@@ -30,7 +30,9 @@ class Url
 
     /**
      * @var string
-     * @Assert\Url()
+     * @Assert\NotBlank()
+     * @Assert\Length(min = "3")
+     * @Assert\Regex(pattern="/^((http|https)\:\/{2})/")
      * @ORM\Column(name="url", type="text")
      * @Expose
      */
