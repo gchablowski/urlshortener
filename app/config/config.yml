@@ -113,3 +113,11 @@ fos_rest:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
         messages:
             'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+            
+# FriendsOfSymfony/FOSOAuthServerBundle
+fos_oauth_server:
+    db_driver: orm       
+    client_class:        UrlShortenerBundle\Entity\Client
+    access_token_class:  UrlShortenerBundle\Entity\AccessToken
+    refresh_token_class: UrlShortenerBundle\Entity\RefreshToken
+    auth_code_class:     UrlShortenerBundle\Entity\AuthCode
