@@ -18,5 +18,6 @@ The controller define 2 routes :
 * /{short_code} (GET the url with the short code)
 * /url/add (save an url with POST and return the shortened url)
 
+you may find the angular-js client here : https://github.com/gchablowski/urlshortener-angular
 
 Created by Gérald Chablowski.
